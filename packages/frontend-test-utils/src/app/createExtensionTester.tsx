@@ -14,18 +14,101 @@
  * limitations under the License.
  */
 
+import React from 'react';
+import { MemoryRouter } from 'react-router-dom';
+import { Link } from '@backstage/core-components';
+import { RenderResult, render } from '@testing-library/react';
 import { createSpecializedApp } from '@backstage/frontend-app-api';
 import {
   ExtensionDefinition,
+  IconComponent,
+  RouteRef,
   coreExtensionData,
   createExtension,
+  createExtensionInput,
   createExtensionOverrides,
+  useRouteRef,
 } from '@backstage/frontend-plugin-api';
-// eslint-disable-next-line @backstage/no-relative-monorepo-imports
-import { resolveExtensionDefinition } from '../../../frontend-plugin-api/src/wiring/resolveExtensionDefinition';
 import { MockConfigApi } from '@backstage/test-utils';
 import { JsonArray, JsonObject, JsonValue } from '@backstage/types';
-import { RenderResult, render } from '@testing-library/react';
+// eslint-disable-next-line @backstage/no-relative-monorepo-imports
+import { resolveExtensionDefinition } from '../../../frontend-plugin-api/src/wiring/resolveExtensionDefinition';
+// eslint-disable-next-line @backstage/no-relative-monorepo-imports
+import { signInPageComponentDataRef } from '../../../frontend-plugin-api/src/extensions/createSignInPageExtension';
+
+const TestCoreNavExtension = createExtension({
+  namespace: 'core',
+  name: 'nav',
+  attachTo: { id: 'core/layout', input: 'nav' },
+  inputs: {
+    items: createExtensionInput({
+      target: coreExtensionData.navTarget,
+    }),
+  },
+  output: {
+    element: coreExtensionData.reactElement,
+  },
+  factory({ inputs }) {
+    const NavItem = (props: {
+      routeRef: RouteRef<undefined>;
+      title: string;
+      icon: IconComponent;
+    }) => {
+      const { routeRef, title, icon: Icon } = props;
+      const to = useRouteRef(routeRef)();
+      return (
+        <li>
+          <Link to={to}>
+            <Icon />
+            {title}
+          </Link>
+        </li>
+      );
+    };
+    return {
+      element: (
+        <nav>
+          {inputs.items.map((item, index) => (
+            <NavItem
+              key={index}
+              icon={item.output.target.icon}
+              title={item.output.target.title}
+              routeRef={item.output.target.routeRef}
+            />
+          ))}
+        </nav>
+      ),
+    };
+  },
+});
+
+const TestCoreRouterExtension = createExtension({
+  namespace: 'core',
+  name: 'router',
+  attachTo: { id: 'core', input: 'root' },
+  inputs: {
+    signInPage: createExtensionInput(
+      {
+        component: signInPageComponentDataRef,
+      },
+      { singleton: true, optional: true },
+    ),
+    children: createExtensionInput(
+      {
+        element: coreExtensionData.reactElement,
+      },
+      { singleton: true },
+    ),
+  },
+  output: {
+    element: coreExtensionData.reactElement,
+  },
+  factory({ inputs }) {
+    return {
+      element: <MemoryRouter>{inputs.children.output.element}</MemoryRouter>,
+    };
+  },
+});
 
 /** @public */
 export class ExtensionTester {
@@ -104,6 +187,10 @@ export class ExtensionTester {
           disabled: false,
         },
       },
+      // switch with a simple nav extension
+      {
+        'core/nav': false,
+      },
     ];
 
     const finalConfig = {
@@ -117,7 +204,11 @@ export class ExtensionTester {
     const app = createSpecializedApp({
       features: [
         createExtensionOverrides({
-          extensions: this.#extensions.map(extension => extension.definition),
+          extensions: [
+            ...this.#extensions.map(extension => extension.definition),
+            TestCoreNavExtension,
+            TestCoreRouterExtension,
+          ],
         }),
       ],
       config: new MockConfigApi(finalConfig),
