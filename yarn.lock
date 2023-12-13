@@ -138,14 +138,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@asyncapi/avro-schema-parser@npm:^3.0.7":
-  version: 3.0.7
-  resolution: "@asyncapi/avro-schema-parser@npm:3.0.7"
+"@asyncapi/avro-schema-parser@npm:^3.0.8":
+  version: 3.0.8
+  resolution: "@asyncapi/avro-schema-parser@npm:3.0.8"
   dependencies:
-    "@asyncapi/parser": ^3.0.1
+    "@asyncapi/parser": ^3.0.0
     "@types/json-schema": ^7.0.11
     avsc: ^5.7.6
-  checksum: c7755708161f41812ebee90c92fb721176230f0006ddd01683b72c7c1d484a6c5cbe7d7e59c54a5c7221f5f722388642ec26b19a67adc9d30059067cc4276d69
+  checksum: ca19f47723a1430e625b5f675c414f039bfff5bdcb215c488df40ed4a9e4cd337205e1f260ea771a91ae0a4d25875b6ed825a36bece81fc5c0a32f000d621583
   languageName: node
   linkType: hard
 
@@ -162,7 +162,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@asyncapi/parser@npm:^3.0.1":
+"@asyncapi/parser@npm:^3.0.0, @asyncapi/parser@npm:^3.0.1":
   version: 3.0.1
   resolution: "@asyncapi/parser@npm:3.0.1"
   dependencies:
@@ -189,25 +189,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@asyncapi/protobuf-schema-parser@npm:^3.0.4":
-  version: 3.0.4
-  resolution: "@asyncapi/protobuf-schema-parser@npm:3.0.4"
+"@asyncapi/protobuf-schema-parser@npm:^3.0.5":
+  version: 3.0.5
+  resolution: "@asyncapi/protobuf-schema-parser@npm:3.0.5"
   dependencies:
-    "@asyncapi/parser": ^3.0.1
+    "@asyncapi/parser": ^3.0.0
     "@types/protocol-buffers-schema": ^3.4.1
     protocol-buffers-schema: ^3.6.0
-  checksum: c176e6d86e53f342ac91067279fb6e1ac3ed9d7f36de197fc723a2ceaf2a2588267c445203d67edcb3cd75308c0c0d6ea401ad69508bfe378c9194420702d3db
+  checksum: 94bfb79671a91647491fb523197ca849330fd7874b3d80e40cc69fdd8666f5faabf1b01db8df12b89afbe265661237c27cc0e1b0d1b68086df65108a83e71a16
   languageName: node
   linkType: hard
 
-"@asyncapi/react-component@npm:1.2.6":
-  version: 1.2.6
-  resolution: "@asyncapi/react-component@npm:1.2.6"
+"@asyncapi/react-component@npm:1.2.8":
+  version: 1.2.8
+  resolution: "@asyncapi/react-component@npm:1.2.8"
   dependencies:
-    "@asyncapi/avro-schema-parser": ^3.0.7
+    "@asyncapi/avro-schema-parser": ^3.0.8
     "@asyncapi/openapi-schema-parser": ^3.0.8
-    "@asyncapi/parser": ^3.0.1
-    "@asyncapi/protobuf-schema-parser": ^3.0.4
+    "@asyncapi/parser": ^3.0.0
+    "@asyncapi/protobuf-schema-parser": ^3.0.5
     highlight.js: ^10.7.2
     isomorphic-dompurify: ^0.13.0
     marked: ^4.0.14
@@ -216,7 +216,7 @@ __metadata:
   peerDependencies:
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
-  checksum: 4afb34562767771048d0848323adea8d498dc555cc529947d4a45f3ec8d7f172bb454814bcf9c4419e105a743736368b56b3ed54d09b60addc06a287ca0e82b9
+  checksum: 0daf29562cccd11d2a5a2478804dc3dc3241da3a2f4ffbe91a107a035879d386264362c1e5f4c982e8dc9fc92c3f1c2b0ded8017e3f044ac09448bb250b59b03
   languageName: node
   linkType: hard
 
@@ -4625,7 +4625,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@backstage/plugin-api-docs@workspace:plugins/api-docs"
   dependencies:
-    "@asyncapi/react-component": 1.2.6
+    "@asyncapi/react-component": 1.2.8
     "@backstage/catalog-model": "workspace:^"
     "@backstage/cli": "workspace:^"
     "@backstage/core-app-api": "workspace:^"
