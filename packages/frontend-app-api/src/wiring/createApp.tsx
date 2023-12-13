@@ -19,13 +19,12 @@ import { ConfigReader, Config } from '@backstage/config';
 import {
   AppTree,
   appTreeApiRef,
-  BackstagePlugin,
   ComponentRef,
   componentsApiRef,
   coreExtensionData,
   createTranslationExtension,
   ExtensionDataRef,
-  ExtensionOverrides,
+  FrontendFeature,
   RouteRef,
   useRouteRef,
 } from '@backstage/frontend-plugin-api';
@@ -213,8 +212,8 @@ export function createExtensionTree(options: {
 }
 
 function deduplicateFeatures(
-  allFeatures: (BackstagePlugin | ExtensionOverrides)[],
-): (BackstagePlugin | ExtensionOverrides)[] {
+  allFeatures: FrontendFeature[],
+): FrontendFeature[] {
   // Start by removing duplicates by reference
   const features = Array.from(new Set(allFeatures));
 
@@ -237,12 +236,10 @@ function deduplicateFeatures(
 
 /** @public */
 export function createApp(options?: {
-  features?: (BackstagePlugin | ExtensionOverrides)[];
+  features?: FrontendFeature[];
   configLoader?: () => Promise<ConfigApi>;
   bindRoutes?(context: { bind: AppRouteBinder }): void;
-  featureLoader?: (ctx: {
-    config: ConfigApi;
-  }) => Promise<(BackstagePlugin | ExtensionOverrides)[]>;
+  featureLoader?: (ctx: { config: ConfigApi }) => Promise<FrontendFeature[]>;
 }): {
   createRoot(): JSX.Element;
 } {
@@ -287,7 +284,7 @@ export function createApp(options?: {
  * @public
  */
 export function createSpecializedApp(options?: {
-  features?: (BackstagePlugin | ExtensionOverrides)[];
+  features?: FrontendFeature[];
   config?: ConfigApi;
   bindRoutes?(context: { bind: AppRouteBinder }): void;
 }): { createRoot(): JSX.Element } {

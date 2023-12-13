@@ -18,6 +18,7 @@ import {
   BackstagePlugin,
   Extension,
   ExtensionOverrides,
+  FrontendFeature,
 } from '@backstage/frontend-plugin-api';
 // eslint-disable-next-line @backstage/no-relative-monorepo-imports
 import { toInternalExtensionOverrides } from '../../../frontend-plugin-api/src/wiring/createExtensionOverrides';
@@ -28,7 +29,7 @@ import { toInternalBackstagePlugin } from '../../../frontend-plugin-api/src/wiri
 
 /** @internal */
 export function resolveAppNodeSpecs(options: {
-  features: (BackstagePlugin | ExtensionOverrides)[];
+  features: FrontendFeature[];
   builtinExtensions: Extension<unknown>[];
   parameters: Array<ExtensionParameters>;
   forbidden?: Set<string>;

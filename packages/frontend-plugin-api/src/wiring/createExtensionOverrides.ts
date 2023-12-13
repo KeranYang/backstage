@@ -16,17 +16,12 @@
 
 import { Extension, ExtensionDefinition } from './createExtension';
 import { resolveExtensionDefinition } from './resolveExtensionDefinition';
-import { FeatureFlagConfig } from './types';
+import { ExtensionOverrides, FeatureFlagConfig } from './types';
 
 /** @public */
 export interface ExtensionOverridesOptions {
   extensions: ExtensionDefinition<unknown>[];
   featureFlags?: FeatureFlagConfig[];
-}
-
-/** @public */
-export interface ExtensionOverrides {
-  readonly $$type: '@backstage/ExtensionOverrides';
 }
 
 /** @internal */
