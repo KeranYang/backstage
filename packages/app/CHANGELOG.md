@@ -1,5 +1,14 @@
 # example-app
 
+## 0.2.90-next.5
+
+### Patch Changes
+
+- Updated dependencies
+  - @backstage/frontend-app-api@0.4.0-next.4
+  - @backstage/plugin-search-react@1.7.4-next.3
+  - @backstage/plugin-tech-radar@0.6.11-next.4
+
 ## 0.2.90-next.4
 
 ### Patch Changes

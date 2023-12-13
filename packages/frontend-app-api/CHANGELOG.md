@@ -1,5 +1,13 @@
 # @backstage/frontend-app-api
 
+## 0.4.0-next.4
+
+### Patch Changes
+
+- c36e0b9: Renamed `AppRouteBinder` to `CreateAppRouteBinder`
+- Updated dependencies
+  - @backstage/frontend-plugin-api@0.4.0-next.3
+
 ## 0.4.0-next.3
 
 ### Patch Changes
